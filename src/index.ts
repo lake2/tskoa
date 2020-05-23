@@ -1,3 +1,4 @@
-export { Tskoa as Koats } from "./Tskoa";
+export { Tskoa } from "./Tskoa";
 export { Controller } from "./Controller";
-export { Route, Get, Query } from "./decorators";
+export * from "./decorators";
+export * from "./Logger";

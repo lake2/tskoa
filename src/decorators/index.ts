@@ -1,5 +1,5 @@
 export * from "./Query";
-export * from "./Get";
+export * from "./Http";
 export * from "./Route";
 
 // Get(): evaluated

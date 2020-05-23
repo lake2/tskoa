@@ -4,48 +4,39 @@ import { HttpMethod } from "../enums";
 export function Get(target: any, key: string, descriptor: PropertyDescriptor): void;
 export function Get(path?: string): any;
 export function Get(): any {
-    if (arguments.length === 0) {
-        return decorate;
-    } else if (arguments.length === 1) {
-        const arg = arguments[0];
+    return factory(HttpMethod.get, arguments);
+}
+
+export function Post(target: any, key: string, descriptor: PropertyDescriptor): void;
+export function Post(path?: string): any;
+export function Post(): any {
+    return factory(HttpMethod.post, arguments);
+}
+
+function factory(method: HttpMethod, args: any): any {
+    if (args.length === 0) {
+        return function (target: any, key: string, descriptor: PropertyDescriptor) {
+            decorate(target, key, descriptor, method);
+        };
+    } else if (args.length === 1) {
+        const arg = args[0];
         if (typeof arg === "string") {
             const path = arg;
             return function (target: any, key: string, descriptor: PropertyDescriptor) {
-                decorate(target, key, descriptor, path);
+                decorate(target, key, descriptor, method, path);
             };
         } else {
             throw new Error("if error");
         }
-    } else if (arguments.length === 3) {
+    } else if (args.length === 3) {
         // @ts-ignore
-        decorate(...arguments);
+        decorate(...args, method);
     } else {
         throw new Error("arguments length error.");
     }
 }
 
-function factory() {
-    if (arguments.length === 0) {
-        return decorate;
-    } else if (arguments.length === 1) {
-        const arg = arguments[0];
-        if (typeof arg === "string") {
-            const path = arg;
-            return function (target: any, key: string, descriptor: PropertyDescriptor) {
-                decorate(target, key, descriptor, path);
-            };
-        } else {
-            throw new Error("if error");
-        }
-    } else if (arguments.length === 3) {
-        // @ts-ignore
-        decorate(...arguments);
-    } else {
-        throw new Error("arguments length error.");
-    }
-}
-
-function decorate(target: any, key: string, descriptor: PropertyDescriptor, path?: string) {
+function decorate(target: any, key: string, descriptor: PropertyDescriptor, method: HttpMethod, path?: string) {
     let meta: Controller.Meta = target[Meta];
     const notValidError = `'${target.constructor.name}' route '${key}' name is not valid.`;
     if (typeof path === "string" && path !== "") {
@@ -74,6 +65,6 @@ function decorate(target: any, key: string, descriptor: PropertyDescriptor, path
         meta.requests[key] = { methods: [], path: "", parameters: [] };
     }
 
-    meta.requests[key].methods.push(HttpMethod.get);
+    meta.requests[key].methods.push(method);
     meta.requests[key].path = meta.route + path;
 }

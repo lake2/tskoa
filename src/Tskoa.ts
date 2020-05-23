@@ -1,4 +1,5 @@
 import Koa, { Context as KoaContext } from 'koa';
+import Body from 'koa-body';
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
 
@@ -8,7 +9,6 @@ import { Class } from './types';
 import Router from '@koa/router';
 
 interface Context extends KoaContext {
-
 }
 
 export class Tskoa {
@@ -42,13 +42,30 @@ export class Tskoa {
                                         context.response.body = { code: -1, message };
                                         return;
                                     } else {
-                                        parameters.push(context.request.query);
+                                        parameters.push(query);
                                     }
                                 } else {
-                                    parameters.push(context.request.query ?? {});
+                                    parameters.push(query ?? {});
+                                }
+                            } else if (param.decorator === "body") {
+                                const body = context.request.body;
+                                if (param.dto && param.dto instanceof Object) {
+                                    const error = await validate(plainToClass(param.dto, body));
+                                    let message: string | undefined;
+                                    if (error.length > 0) {
+                                        const constraints = error[0].constraints;
+                                        message = constraints?.[Object.keys(constraints)[0]];
+                                        context.response.status = 400;
+                                        context.response.body = { code: -1, message };
+                                        return;
+                                    } else {
+                                        parameters.push(body);
+                                    }
+                                } else {
+                                    parameters.push(body ?? {});
                                 }
                             } else {
-                                throw new Error(`Route handler function '${key}' parameter '${param}' doest't have any decorators.`);
+                                throw new Error(`'${item.name}.${key}()' parameter has unknown decorator.`);
                             }
                         }
                     }
@@ -61,6 +78,7 @@ export class Tskoa {
                 });
             });
         });
+        this.koa.use(Body());
         this.koa.use(this.router.routes()).use(this.router.allowedMethods());
     }
 

@@ -1,8 +1,9 @@
 import { IsNotEmpty } from "class-validator";
 
-import { Get, Query, Route } from "./decorators";
-import { Controller, Meta } from "./Controller";
+import { Get, Post, Query, Route } from "./decorators";
+import { Controller } from "./Controller";
 import { Tskoa } from './Tskoa';
+import { Body } from "./decorators/Body";
 
 namespace DTO {
     export class User {
@@ -20,23 +21,16 @@ class HomeController extends Controller {
         return { name: "1" };
     }
 
-    @Get()
+    @Get
     query(@Query(DTO.User) query: DTO.User) {
         return { name: query.name };
     }
 
-    // @Get()
-    // query_2(@Query() query: DTO.User) {
-    //     return { name: query.name };
-    // }
-
-    // @Get()
-    // query_3(@Query query: DTO.User) {
-    //     return { name: query.name };
-    // }
+    @Post
+    post(@Body body: DTO.User) {
+        return { name: body.name };
+    }
 }
-
-console.log(HomeController.prototype[Meta]);
 
 const app = new Tskoa({ controllers: [HomeController] });
 
