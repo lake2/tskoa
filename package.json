@@ -9,8 +9,12 @@
     "scripts": {
         "test": "jest --bail",
         "dev": "nodemon ./run/src/app.js",
-        "lint": "node_modules/.bin/tslint -p tsconfig.json --fix"
+        "lint": "node_modules/.bin/tslint -p tsconfig.json --fix",
+        "dist": "npm publish --registry http://registry.npmjs.org"
     },
+    "files": [
+        "run/src/**/*"
+    ],
     "keywords": [],
     "author": "lake2",
     "license": "MIT",
