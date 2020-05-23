@@ -21,6 +21,9 @@
     "devDependencies": {
         "@types/jest": "^25.2.3",
         "@types/supertest": "^2.0.9",
+        "grunt": "^1.1.0",
+        "grunt-contrib-clean": "^2.0.0",
+        "grunt-shell": "^3.0.1",
         "jest": "^26.0.1",
         "supertest": "^4.0.2",
         "tslint": "^6.1.2",
