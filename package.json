@@ -1,0 +1,33 @@
+{
+    "name": "tskoa",
+    "version": "0.0.1",
+    "description": "tskoa",
+    "repository": {
+        "url": "https://github.com/lake2/tskoa"
+    },
+    "main": "./run/src/index.js",
+    "scripts": {
+        "test": "jest --bail",
+        "dev": "nodemon ./run/src/app.js",
+        "lint": "node_modules/.bin/tslint -p tsconfig.json --fix"
+    },
+    "keywords": [],
+    "author": "lake2",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/jest": "^25.2.3",
+        "@types/supertest": "^2.0.9",
+        "jest": "^26.0.1",
+        "supertest": "^4.0.2",
+        "tslint": "^6.1.2",
+        "typescript": "^3.9.3"
+    },
+    "dependencies": {
+        "@koa/router": "^8.0.8",
+        "@types/koa": "^2.11.3",
+        "@types/koa__router": "^8.0.2",
+        "class-transformer": "^0.2.3",
+        "class-validator": "^0.12.2",
+        "koa": "^2.12.0"
+    }
+}
