@@ -275,11 +275,7 @@ class Content {
 export class UserController extends Controller {
     
     @Post("/info/:id")
-    public async getInfoById(
-    @Params(User)  params: User,
-    @Query(Type)   query : Type, 
-    @Body(Content) body  : Content,
-    ) {
+    public async getInfoById(@Params(User) params: User, @Query(Type) query: Type, @Body(Content) body: Content) {
         return {
             code: 200,
             data: {
