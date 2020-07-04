@@ -10,6 +10,7 @@ export class Controller {
 export declare namespace Controller {
     interface Meta {
         route: string
+        authorized?: boolean
         requests: Requests
     }
 
@@ -17,12 +18,13 @@ export declare namespace Controller {
         methods: Array<keyof typeof HttpMethod>,
         path: string,
         parameters: Array<Request.Parameter>
+        authorized?: boolean
     }
 
     namespace Request {
         interface Parameter {
-            index: number,
-            decorator: "query" | "body" | "params",
+            index: number
+            decorator: "query" | "body" | "params"
             dto?: Class<any>
         }
     }
