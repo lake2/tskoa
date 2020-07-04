@@ -61,6 +61,7 @@ import { Controller, Get, Route } from "tskoa";
 
 @Route
 export class HomeController extends Controller {
+    
     @Get
     public index() {
         return "Hello world";
@@ -125,6 +126,7 @@ Hello world
 ```ts
 @Route
 export class HomeController extends Controller {
+    
     @Get
     public index() {
         return ["Hello world"];
@@ -142,6 +144,7 @@ export class HomeController extends Controller {
 // 匹配 Get /home/index
 @Route
 export class HomeController extends Controller {
+    
     @Get
     public index() {
         return "Hello world";
@@ -155,6 +158,7 @@ export class HomeController extends Controller {
 // 匹配 Get /foo/bar
 @Route("/foo")
 export class HomeController extends Controller {
+    
     @Get("/bar")
     public async index() {
         return "Hello world";
@@ -177,6 +181,7 @@ export class HomeController extends Controller {
 // 匹配 Post /home/index
 @Route
 export class HomeController extends Controller {
+    
     @Get
     @Post
     public index() {
@@ -200,6 +205,7 @@ class User { id: string; }
 
 @Route
 export class UserController extends Controller {
+    
     @Get("/info/:id")
     public async getInfoById(@Params params: User) {
         return { code: 200, data: { id: params.id } };
@@ -230,6 +236,7 @@ class User {
 
 @Route
 export class UserController extends Controller {
+    
     @Get("/info/:id")
     public async getInfoById(@Params(User) params: User) {
         return { code: 200, data: { id: params.id } };
@@ -266,8 +273,13 @@ class Content {
 
 @Route
 export class UserController extends Controller {
+    
     @Post("/info/:id")
-    public async getInfoById(@Params(User) params: User, @Query(Type) query: Type, @Body(Content) body: Content) {
+    public async getInfoById(
+    @Params(User)  params: User,
+    @Query(Type)   query : Type, 
+    @Body(Content) body  : Content,
+    ) {
         return {
             code: 200,
             data: {
