@@ -1,6 +1,6 @@
-<img src="docs/doux.png" alt="logo" height="150" align="right" />
+<img src="https://user-images.githubusercontent.com/6293752/86509520-18577280-be1b-11ea-9f37-f5a3c71ba491.png" alt="logo" height="150" align="right" />
 
-# Tskoa [![CircleCI](https://circleci.com/gh/yisar/doux.svg?style=svg)](https://circleci.com/gh/yisar/doux) [![npm](https://img.shields.io/npm/v/doux.svg?label=)](https://npmjs.com/package/doux)
+# Tskoa
 
 > 一个轻量级的koa开发框架，用于快速搭建restful api。
 
