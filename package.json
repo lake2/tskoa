@@ -1,6 +1,6 @@
 {
     "name": "tskoa",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "tskoa",
     "repository": {
         "url": "https://github.com/lake2/tskoa"
@@ -10,7 +10,7 @@
         "test": "jest --bail",
         "dev": "nodemon ./run/src/app.js",
         "lint": "node_modules/.bin/tslint -p tsconfig.json --fix",
-        "dist": "npm publish --registry http://registry.npmjs.org"
+        "pub": "grunt dist --verbose"
     },
     "files": [
         "run/src/**/*"

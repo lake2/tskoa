@@ -4,6 +4,7 @@ import { Controller, Get, Query, Route } from "../src";
 
 class User {
     @IsNotEmpty()
+    // @ts-ignore
     name: string;
 }
 

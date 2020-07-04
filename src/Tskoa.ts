@@ -1,12 +1,11 @@
-import Koa, { Context as KoaContext } from 'koa';
 import Body from 'koa-body';
+import Router from '@koa/router';
+import Koa, { Context as KoaContext } from 'koa';
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
 
 import { Controller, Meta } from "./Controller";
 import { Class } from './types';
-
-import Router from '@koa/router';
 
 interface Context extends KoaContext {
 }
@@ -46,6 +45,23 @@ export class Tskoa {
                                     }
                                 } else {
                                     parameters.push(query ?? {});
+                                }
+                            } else if (param.decorator === "params") {
+                                const params = context.params;
+                                if (param.dto && param.dto instanceof Object) {
+                                    const error = await validate(plainToClass(param.dto, params));
+                                    let message: string | undefined;
+                                    if (error.length > 0) {
+                                        const constraints = error[0].constraints;
+                                        message = constraints?.[Object.keys(constraints)[0]];
+                                        context.response.status = 400;
+                                        context.response.body = { code: -1, message };
+                                        return;
+                                    } else {
+                                        parameters.push(params);
+                                    }
+                                } else {
+                                    parameters.push(params ?? {});
                                 }
                             } else if (param.decorator === "body") {
                                 const body = context.request.body;

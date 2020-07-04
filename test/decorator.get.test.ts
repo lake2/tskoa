@@ -28,16 +28,20 @@ describe("test", () => {
     });
 
     it("request", async () => {
-        await request().get("/get_1/path_1").expect(204);
-        await request().get("/get_1/path_2").expect(204);
-        await request().get("/get_1/path_3").expect(204);
-        await request().get("/get_1/path_4").expect(204);
-        await request().get("/get_1/path_5").expect(204);
-        await request().get("/get_1/path_6").expect(204);
-        await request().get("/get_1/path_7").expect(204);
-        await request().get("/get_1/path_8").expect(204);
-        await request().get("/get_1/path_9").expect(204);
-        expect((await request().get("/get_2/name").expect(200)).body).toMatchObject({ name: "1" });
-        expect((await request().get("/get_2/task").expect(200)).body).toMatchObject({ name: "1" });
+        expect((await request().get("/get_1/path_1")).status).toBe(204);
+        expect((await request().get("/get_1/path_2")).status).toBe(204);
+        expect((await request().get("/get_1/path_3")).status).toBe(204);
+        expect((await request().get("/get_1/path_4")).status).toBe(204);
+        expect((await request().get("/get_1/path_5")).status).toBe(204);
+        expect((await request().get("/get_1/path_6")).status).toBe(204);
+        expect((await request().get("/get_1/path_7")).status).toBe(204);
+        expect((await request().get("/get_1/path_8")).status).toBe(204);
+        expect((await request().get("/get_1/path_9")).status).toBe(204);
+
+        expect((await request().get("/get_2/name")).status).toBe(200);
+        expect((await request().get("/get_2/name")).body).toMatchObject({ name: "1" });
+
+        expect((await request().get("/get_2/task")).status).toBe(200);
+        expect((await request().get("/get_2/task")).body).toMatchObject({ name: "1" });
     });
 });

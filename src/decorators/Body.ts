@@ -38,4 +38,5 @@ function decorate(target: any, key: string, index: number, dto?: Class<any>) {
     }
 
     parameters.push({ index, decorator: "body", dto });
+    parameters.sort((a, b) => a.index - b.index);
 }

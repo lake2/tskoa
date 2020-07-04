@@ -58,13 +58,20 @@ describe("test", () => {
     });
 
     it("request", async () => {
-        expect((await request().get("/query_1/query_1").expect(400)).body).toMatchObject({ message: "name should not be empty" });
-        expect((await request().get("/query_1/query_1").query({ name: "2" }).expect(200)).body).toMatchObject({ name: "2" });
+        expect((await request().get("/query_1/query_1")).status).toBe(400);
+        expect((await request().get("/query_1/query_1")).body).toMatchObject({ message: "name should not be empty" });
+        expect((await request().get("/query_1/query_1").query({ name: "2" })).status).toBe(200);
+        expect((await request().get("/query_1/query_1").query({ name: "2" })).body).toMatchObject({ name: "2" });
 
-        expect((await request().get("/query_1/query_2").expect(200)).body).toMatchObject({});
-        expect((await request().get("/query_1/query_2").query({ name: "2" }).expect(200)).body).toMatchObject({ name: "2" });
+        expect((await request().get("/query_1/query_2")).status).toBe(200);
+        expect((await request().get("/query_1/query_2")).body).toMatchObject({});
+        expect((await request().get("/query_1/query_2").query({ name: "2" })).status).toBe(200);
+        expect((await request().get("/query_1/query_2").query({ name: "2" })).body).toMatchObject({ name: "2" });
 
-        expect((await request().get("/query_1/query_3").expect(200)).body).toMatchObject({});
-        expect((await request().get("/query_1/query_3").query({ name: "2" }).expect(200)).body).toMatchObject({ name: "2" });
+        expect((await request().get("/query_1/query_3")).status).toBe(200);
+        expect((await request().get("/query_1/query_3")).body).toMatchObject({});
+        expect((await request().get("/query_1/query_3").query({ name: "2" })).status).toBe(200);
+        expect((await request().get("/query_1/query_3").query({ name: "2" })).body).toMatchObject({ name: "2" });
+
     });
 });

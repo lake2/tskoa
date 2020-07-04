@@ -13,6 +13,24 @@ export function Post(): any {
     return factory(HttpMethod.post, arguments);
 }
 
+export function Put(target: any, key: string, descriptor: PropertyDescriptor): void;
+export function Put(path?: string): any;
+export function Put(): any {
+    return factory(HttpMethod.put, arguments);
+}
+
+export function Patch(target: any, key: string, descriptor: PropertyDescriptor): void;
+export function Patch(path?: string): any;
+export function Patch(): any {
+    return factory(HttpMethod.patch, arguments);
+}
+
+export function Delete(target: any, key: string, descriptor: PropertyDescriptor): void;
+export function Delete(path?: string): any;
+export function Delete(): any {
+    return factory(HttpMethod.delete, arguments);
+}
+
 function factory(method: HttpMethod, args: any): any {
     if (args.length === 0) {
         return function (target: any, key: string, descriptor: PropertyDescriptor) {
@@ -38,9 +56,9 @@ function factory(method: HttpMethod, args: any): any {
 
 function decorate(target: any, key: string, descriptor: PropertyDescriptor, method: HttpMethod, path?: string) {
     let meta: Controller.Meta = target[Meta];
-    const notValidError = `'${target.constructor.name}' route '${key}' name is not valid.`;
+    const notValidError = `'${target.constructor.name}' route '${key}' path '${path}' is not valid.`;
     if (typeof path === "string" && path !== "") {
-        const regexp = /^\/*(\w+)\/*$/.exec(path);
+        const regexp = /^\/*([\w\/:]+?)\/*$/.exec(path);
         if (regexp?.length === 2) {
             path = '/' + regexp?.[1];
         } else {
@@ -50,7 +68,7 @@ function decorate(target: any, key: string, descriptor: PropertyDescriptor, meth
         path = '/' + key;
     }
 
-    const regexp = /^\/\w+$/;
+    const regexp = /^\/[\w\/:]+$/;
     if (!regexp.test(path)) {
         throw new Error(notValidError);
     }

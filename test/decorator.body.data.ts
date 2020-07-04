@@ -5,6 +5,7 @@ import { Body } from "../src/decorators/Body";
 
 class User {
     @IsNotEmpty()
+    // @ts-ignore
     name: string;
 }
 

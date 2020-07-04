@@ -11,7 +11,8 @@ describe("test", () => {
     });
 
     it("request", async () => {
-        await request().get("/post_1/name").expect(405);
-        expect((await request().post("/post_1/name").expect(200)).body).toMatchObject({ name: "1" });
+        expect((await request().get("/post_1/name")).status).toBe(405);
+        expect((await request().post("/post_1/name")).status).toBe(200);
+        expect((await request().post("/post_1/name")).body).toMatchObject({ name: "1" });
     });
 });

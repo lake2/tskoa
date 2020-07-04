@@ -22,7 +22,7 @@ export declare namespace Controller {
     namespace Request {
         interface Parameter {
             index: number,
-            decorator: "query" | "body",
+            decorator: "query" | "body" | "params",
             dto?: Class<any>
         }
     }

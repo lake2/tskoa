@@ -1,37 +1,48 @@
-import { IsNotEmpty } from "class-validator";
 
-import { Get, Post, Query, Route } from "./decorators";
+import { Post, Route, Params, Query } from "./decorators";
 import { Controller } from "./Controller";
 import { Tskoa } from './Tskoa';
+
+import { IsNumberString, IsString } from "class-validator";
 import { Body } from "./decorators/Body";
 
-namespace DTO {
-    export class User {
-        @IsNotEmpty()
-        name: string;
+class User {
+    @IsNumberString()
+    // @ts-ignore
+    id: string;
+}
+
+class Type {
+    @IsString()
+    // @ts-ignore
+    type: string
+}
+
+class Content {
+    @IsString()
+    // @ts-ignore
+    search: string
+}
+
+@Route
+export class UserController extends Controller {
+    @Post("/info/:id")
+    public async getInfoById(@Params(User) params: User, @Query(Type) query: Type, @Body(Content) body: Content) {
+        return {
+            code: 200,
+            data: {
+                id: params.id,
+                type: query.type,
+                search: body.search
+            }
+        };
     }
 }
 
-
-@Route("/home")
-class HomeController extends Controller {
-
-    @Get("/name")
-    name() {
-        return { name: "1" };
-    }
-
-    @Get
-    query(@Query(DTO.User) query: DTO.User) {
-        return { name: query.name };
-    }
-
-    @Post
-    post(@Body body: DTO.User) {
-        return { name: body.name };
-    }
-}
-
-const app = new Tskoa({ controllers: [HomeController] });
+const app = new Tskoa({
+    controllers: [
+        UserController
+    ]
+});
 
 app.listen(3000);
