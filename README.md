@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/6293752/86509520-18577280-be1b-11ea-9f37-f5a3c71ba491.png" alt="logo" height="150" align="right" />
 
-# Tskoa
+# Tskoa [![github ci](https://github.com/lake2/tskoa/workflows/Node.js%20CI/badge.svg)](https://github.com/lake2/tskoa/actions)
 
 > 一个轻量级的koa开发框架，用于快速搭建restful api。
 
