@@ -63,7 +63,7 @@ import { Controller, Get, Route } from "tskoa";
 export class HomeController extends Controller {
     
     @Get
-    public index() {
+    index() {
         return "Hello world";
     }
 }
@@ -128,7 +128,7 @@ Hello world
 export class HomeController extends Controller {
     
     @Get
-    public index() {
+    index() {
         return ["Hello world"];
     }
 }
@@ -147,7 +147,7 @@ export class HomeController extends Controller {
 export class HomeController extends Controller {
     
     @Get
-    public index() {
+    index() {
         return "Hello world";
     }
 }
@@ -162,7 +162,7 @@ export class HomeController extends Controller {
 export class HomeController extends Controller {
     
     @Get("/bar")
-    public async index() {
+    async index() {
         return "Hello world";
     }
 }
@@ -187,7 +187,7 @@ export class HomeController extends Controller {
     
     @Get
     @Post
-    public index() {
+    index() {
         return "Hello world";
     }
 }
@@ -211,7 +211,7 @@ class User { id: string; }
 export class UserController extends Controller {
     
     @Get("/info/:id")
-    public async getInfoById(@Params params: User) {
+    async getInfoById(@Params params: User) {
         return { code: 200, data: { id: params.id } };
     }
 }
@@ -242,7 +242,7 @@ class User {
 export class UserController extends Controller {
     
     @Get("/info/:id")
-    public async getInfoById(@Params(User) params: User) {
+    async getInfoById(@Params(User) params: User) {
         return { code: 200, data: { id: params.id } };
     }
 }
@@ -279,7 +279,7 @@ class Content {
 export class UserController extends Controller {
     
     @Post("/info/:id")
-    public async getInfoById(@Params(User) params: User, @Query(Type) query: Type, @Body(Content) body: Content) {
+    async getInfoById(@Params(User) params: User, @Query(Type) query: Type, @Body(Content) body: Content) {
         return {
             code: 200,
             data: {
