@@ -8,6 +8,7 @@
     "main": "./run/src/index.js",
     "scripts": {
         "test": "jest --bail",
+        "cover": "jest --coverage && coveralls < coverage/lcov.info",
         "dev": "nodemon ./run/src/app.js",
         "lint": "node_modules/.bin/tslint -p tsconfig.json --fix",
         "pub": "grunt dist --verbose"
@@ -21,6 +22,7 @@
     "devDependencies": {
         "@types/jest": "^25.2.3",
         "@types/supertest": "^2.0.10",
+        "coveralls": "^3.1.0",
         "grunt": "^1.2.0",
         "grunt-contrib-clean": "^2.0.0",
         "grunt-shell": "^3.0.1",
