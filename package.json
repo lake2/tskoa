@@ -8,7 +8,7 @@
     "main": "./run/src/index.js",
     "scripts": {
         "test": "jest --bail",
-        "cover": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+        "cover": "jest --coverage && coveralls < coverage/lcov.info",
         "dev": "nodemon ./run/src/app.js",
         "lint": "node_modules/.bin/tslint -p tsconfig.json --fix",
         "pub": "grunt dist --verbose"
