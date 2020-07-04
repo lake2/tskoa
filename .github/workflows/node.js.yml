@@ -28,9 +28,9 @@ jobs:
     - run: npm install typescript -g
     - run: tsc -p tsconfig.json
     - run: npm run test
+    - run: npm run cover
       
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-    - run: npm run cover

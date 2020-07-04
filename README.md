@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/6293752/86509520-18577280-be1b-11ea-9f37-f5a3c71ba491.png" alt="logo" height="150" align="right" />
 
-# Tskoa [![github ci](https://github.com/lake2/tskoa/workflows/Node.js%20CI/badge.svg)](https://github.com/lake2/tskoa/actions)
+# Tskoa [![github ci](https://github.com/lake2/tskoa/workflows/Node.js%20CI/badge.svg)](https://github.com/lake2/tskoa/actions) [![coverage](https://coveralls.io/repos/github/lake2/tskoa/badge.svg?branch=master)](https://coveralls.io/github/lake2/tskoa?branch=master)
 
 > 一个轻量级的koa开发框架，用于快速搭建restful api。
 
