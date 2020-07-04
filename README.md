@@ -136,6 +136,16 @@ export class HomeController extends Controller {
 
 结果：
 
+```
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 15
+Date: Sat, 04 Jul 2020 15:02:28 GMT
+Connection: keep-alive
+
+["Hello world"]
+```
+
 ### 路由
 
 默认情况下，路由是根据`Controller`类和方法的名称匹配的，例如：
