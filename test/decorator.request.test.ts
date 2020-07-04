@@ -34,8 +34,8 @@ describe("test", () => {
                 data: {
                     id: "1",
                     type: "abc",
-                    search: "key"
-                }
+                    search: "key",
+                },
             }
         );
     });

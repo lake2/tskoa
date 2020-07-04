@@ -1,5 +1,6 @@
 import { IsNumberString, IsString } from "class-validator";
-import { Controller, Route, Put, Patch, Delete, Get, Post, Params, Query, Body } from "../src";
+
+import { Body, Controller, Delete, Get, Params, Patch, Post, Put, Query, Route } from "../src";
 
 @Route
 export class Request_1_Controller extends Controller {
@@ -34,13 +35,13 @@ class User {
 class Type {
     @IsString()
     // @ts-ignore
-    type: string
+    type: string;
 }
 
 class Content {
     @IsString()
     // @ts-ignore
-    search: string
+    search: string;
 }
 
 @Route
@@ -52,8 +53,8 @@ export class Request_2_Controller extends Controller {
             data: {
                 id: params.id,
                 type: query.type,
-                search: body.search
-            }
+                search: body.search,
+            },
         };
     }
 }

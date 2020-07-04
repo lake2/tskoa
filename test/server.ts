@@ -7,6 +7,7 @@ import * as Test_03 from "./decorator.post.data";
 import * as Test_04 from "./decorator.body.data";
 import * as Test_05 from "./decorator.request.data";
 import * as Test_06 from "./decorator.params.data";
+import * as Test_07 from "./decorator.authorized.data";
 
 const app = new Tskoa({
     controllers: [
@@ -19,7 +20,13 @@ const app = new Tskoa({
         Test_05.Request_2_Controller,
         Test_06.Params_1_Controller,
         Test_06.Params_2_Controller,
+        Test_07.Auth_3_Controller,
+        Test_07.Auth_4_Controller,
+        Test_07.Auth_5_Controller,
     ],
+    jwt: {
+        secret: "123",
+    },
 });
 
 export function request() {

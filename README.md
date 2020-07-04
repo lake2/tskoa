@@ -142,6 +142,7 @@ export class HomeController extends Controller {
 
 ```ts
 // 匹配 Get /home/index
+
 @Route
 export class HomeController extends Controller {
     
@@ -156,6 +157,7 @@ export class HomeController extends Controller {
 
 ```ts
 // 匹配 Get /foo/bar
+
 @Route("/foo")
 export class HomeController extends Controller {
     
@@ -179,6 +181,7 @@ export class HomeController extends Controller {
 ```ts
 // 匹配 Get  /home/index
 // 匹配 Post /home/index
+
 @Route
 export class HomeController extends Controller {
     
@@ -197,6 +200,7 @@ export class HomeController extends Controller {
 - @Params
 - @Query
 - @Body
+- @Jwt
 
 命名路由可以通过`@Params`获得
 
@@ -318,7 +322,63 @@ Content-Length: 24
 开启JTW验证：
 
 ```ts
+import jsonwebtoken from 'jsonwebtoken';
 
+@Route
+export class UserController extends Controller {
+
+    @Get
+    async token() {
+        const token = jsonwebtoken.sign({ user: 'jack' }, 'private key', { expiresIn: '10h' });
+        return { code: 200, data: token };
+    }
+
+    @Get
+    @Authorized
+    async info(@Jwt jwt: any) {
+        return { code: 200, data: { name: jwt.user } };
+    }
+}
+
+const app = new Tskoa({
+    controllers: [
+        UserController
+    ],
+    jwt: {
+        secret: "private key"
+    }
+});
+
+app.listen(3000);
+```
+
+请求`get /user/token`获得一个`token`:
+
+```json
+{
+    "code": 200,
+    "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiamFjayIsImlhdCI6MTU5Mzg3MTA3NywiZXhwIjoxNTkzOTA3MDc3fQ.fSiIgZR0-C2D-TAhF5WO4XKEvKavAJ5Lklsj9sH_l0g"
+}
+```
+
+请求`get /user/info`：
+
+```
+GET http://127.0.0.1:3000/user/info HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiamFjayIsImlhdCI6MTU5Mzg3MTA3NywiZXhwIjoxNTkzOTA3MDc3fQ.fSiIgZR0-C2D-TAhF5WO4XKEvKavAJ5Lklsj9sH_l0g
+Accept: */*
+Host: 127.0.0.1:3000
+```
+
+返回：
+
+```json
+{
+    "code": 200,
+    "data": {
+        "name": "jack"
+    }
+}
 ```
 
 ### 日志

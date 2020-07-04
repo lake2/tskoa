@@ -24,7 +24,7 @@ export declare namespace Controller {
     namespace Request {
         interface Parameter {
             index: number
-            decorator: "query" | "body" | "params"
+            decorator: "query" | "body" | "params" | "jwt"
             dto?: Class<any>
         }
     }

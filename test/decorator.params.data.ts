@@ -1,6 +1,6 @@
 import { IsNumberString } from "class-validator";
 
-import { Controller, Get, Route, Params } from "../src";
+import { Controller, Get, Params, Route } from "../src";
 
 class User {
     @IsNumberString()

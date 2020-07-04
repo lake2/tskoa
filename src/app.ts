@@ -1,46 +1,30 @@
 
-import { Tskoa, Controller, Post, Route, Params, Query } from './index';
-
-import { IsNumberString, IsString } from "class-validator";
-import { Body } from "./decorators/Body";
-
-class User {
-    @IsNumberString()
-    // @ts-ignore
-    id: string;
-}
-
-class Type {
-    @IsString()
-    // @ts-ignore
-    type: string
-}
-
-class Content {
-    @IsString()
-    // @ts-ignore
-    search: string
-}
+import jsonwebtoken from 'jsonwebtoken';
+import { Authorized, Controller, Get, Jwt, Params, Post, Query, Route, Tskoa } from './index';
 
 @Route
 export class UserController extends Controller {
-    @Post("/info/:id")
-    public async getInfoById(@Params(User) params: User, @Query(Type) query: Type, @Body(Content) body: Content) {
-        return {
-            code: 200,
-            data: {
-                id: params.id,
-                type: query.type,
-                search: body.search
-            }
-        };
+
+    @Get
+    async token() {
+        const token = jsonwebtoken.sign({ user: 'jack' }, 'private key', { expiresIn: '10h' });
+        return { code: 200, data: token };
+    }
+
+    @Get
+    @Authorized
+    async info(@Jwt jwt: any) {
+        return { code: 200, data: { name: jwt.user } };
     }
 }
 
 const app = new Tskoa({
     controllers: [
-        UserController
-    ]
+        UserController,
+    ],
+    jwt: {
+        secret: "private key",
+    },
 });
 
 app.listen(3000);

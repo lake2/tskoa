@@ -1,9 +1,9 @@
 import { Controller, Meta } from "../Controller";
 import { Class } from "../types";
 
-export function Params(target: any, key: string, index: number): void;
-export function Params<T>(dto?: Class<T>): any;
-export function Params(): any {
+export function Jwt(target: any, key: string, index: number): void;
+export function Jwt<T>(dto?: Class<T>): any;
+export function Jwt(): any {
     if (arguments.length === 0) {
         return decorate;
     } else if (arguments.length === 1) {
@@ -33,10 +33,10 @@ function decorate(target: any, key: string, index: number, dto?: Class<any>) {
     }
     const parameters = meta.requests[key].parameters;
 
-    if (parameters.some(t => t.decorator === "params")) {
-        throw new Error(`'${target.constructor.name}.${key}()' has multiple Params decorator.`);
+    if (parameters.some(t => t.decorator === "jwt")) {
+        throw new Error(`'${target.constructor.name}.${key}()' has multiple Jwt decorator.`);
     }
 
-    parameters.push({ index, decorator: "params", dto });
+    parameters.push({ index, decorator: "jwt", dto });
     parameters.sort((a, b) => a.index - b.index);
 }

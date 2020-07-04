@@ -6,7 +6,10 @@ export function Authorized(target: any, key: string, descriptor: PropertyDescrip
 export function Authorized(value?: boolean): any;
 export function Authorized(): any {
     if (arguments.length === 0) {
-        return decorate;
+        return function () {
+            // @ts-ignore
+            decorate(...arguments, true);
+        };
     } else if (arguments.length === 1) {
         const arg = arguments[0];
         if (typeof arg === "boolean") {
@@ -15,27 +18,24 @@ export function Authorized(): any {
                 decorate(...arguments, arg);
             };
         } else if (typeof arg === "function") {
-            decorate(arg);
+            decorate(arg, true);
         } else {
             throw new Error("if error");
         }
     } else if (arguments.length === 3) {
         // @ts-ignore
-        decorate(...arguments);
+        decorate(...arguments, true);
     } else {
         throw new Error("arguments length error.");
     }
 }
 
-function decorate(target: any, key: string, descriptor: PropertyDescriptor, authorized?: boolean): void
-function decorate(target: Class<Controller>, authorized?: boolean): void
+function decorate(target: any, key: string, descriptor: PropertyDescriptor, authorized?: boolean): void;
+function decorate(target: Class<Controller>, authorized: boolean): void;
 function decorate(): any {
     if (arguments.length <= 2) {
-        let target: Class<Controller> = arguments[0];
-        let authorized: boolean | undefined = arguments[1];
-        if (target.prototype === undefined) {
-            debugger
-        }
+        const target: Class<Controller> = arguments[0];
+        const authorized: boolean | undefined = arguments[1];
         let meta: Controller.Meta = target.prototype[Meta];
 
         if (target.prototype[Meta] === undefined) {
@@ -47,9 +47,9 @@ function decorate(): any {
 
         meta.authorized = authorized;
     } else {
-        let target: any = arguments[0];
-        let key: string = arguments[1];
-        let authorized: boolean | undefined = arguments[3];
+        const target: any = arguments[0];
+        const key: string = arguments[1];
+        const authorized: boolean | undefined = arguments[3];
 
         let meta: Controller.Meta = target[Meta];
 
