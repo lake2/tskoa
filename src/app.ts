@@ -1,6 +1,6 @@
 
 import jsonwebtoken from 'jsonwebtoken';
-import { Authorized, Controller, Get, Jwt, Params, Post, Query, Route, Tskoa } from './index';
+import { Authorized, Controller, Get, Jwt, Route, Tskoa } from './index';
 
 @Route
 export class UserController extends Controller {

@@ -1,7 +1,7 @@
 import { Controller } from "../src";
 import * as Test from "./decorator.authorized.data";
 import { Meta } from "../src/Controller";
-import { request } from "./server";
+// import { request } from "./server";
 
 describe("test", () => {
     jest.setTimeout(30000);
