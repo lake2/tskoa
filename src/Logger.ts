@@ -47,4 +47,12 @@ export class Logger {
     info(messgae: string) {
         this.winston.info(messgae);
     }
+
+    warn(messgae: string) {
+        this.winston.warn(messgae);
+    }
+
+    error(messgae: string) {
+        this.winston.error(messgae);
+    }
 }

@@ -253,7 +253,7 @@ export class UserController extends Controller {
 }
 ```
 
-`@Query`可以获得查询参数，`@Body`可以获得post body：
+`@Query`可以获得查询参数，`@Body`可以获得`post body`：
 
 ```ts
 class User {
@@ -313,13 +313,30 @@ Content-Length: 24
 }
 ```
 
-
-
-### 路由参数
-
 ### 权限验证
 
+开启JTW验证：
+
+```ts
+
+```
+
 ### 日志
+
+```ts
+import path from "path";
+import { Logger } from 'tskoa';
+
+const logger = new Logger({
+    console: true,                                // 是否在控制台显示
+    dirname: path.resolve(__dirname, "../logs"),  // 日志存放目录
+    filename: 'logs'                              // 日志文件名
+});
+
+logger.info("info 123");
+logger.warn("warn 456");
+logger.error("error 789");
+```
 
 ### License
 

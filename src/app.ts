@@ -1,7 +1,5 @@
 
-import { Post, Route, Params, Query } from "./decorators";
-import { Controller } from "./Controller";
-import { Tskoa } from './Tskoa';
+import { Tskoa, Controller, Post, Route, Params, Query } from './index';
 
 import { IsNumberString, IsString } from "class-validator";
 import { Body } from "./decorators/Body";

@@ -6,7 +6,7 @@
         "outDir": "./run",
         "noEmit": false,
         "moduleResolution": "node",
-        "declaration": false,
+        "declaration": true,
         "downlevelIteration": true,
         "noUnusedLocals": true,
         "noImplicitAny": true,
