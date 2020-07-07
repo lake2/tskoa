@@ -329,7 +329,7 @@ Content-Length: 24
 
 ### 权限验证
 
-开启JTW验证：
+`@Authorized`可以为`Controller`或者方法开启JWT验证：
 
 ```ts
 import jsonwebtoken from 'jsonwebtoken';
