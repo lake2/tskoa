@@ -238,7 +238,7 @@ export class UserController extends Controller {
 }
 ```
 
-可以使用`class-validator`，给`@Params`传递一个参数，进行数据验证：
+可以使用`class-validator`，给`@Params`传递一个参数，进行DTO数据验证：
 
 ```ts
 import { IsNumberString } from "class-validator";
