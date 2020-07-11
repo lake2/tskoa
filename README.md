@@ -121,7 +121,7 @@ Connection: keep-alive
 Hello world
 ```
 
-你可以返回一个`json`或者`array`：
+你可以返回一个`json`或者`array`，这时候`Content-Type`为`application/json`：
 
 ```ts
 @Route
